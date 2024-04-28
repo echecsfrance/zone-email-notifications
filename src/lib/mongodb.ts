@@ -1,4 +1,4 @@
-import { mongodbURI } from "../config";
+import { mongodbURI } from "../config.js";
 import { MongoClient, ServerApiVersion } from "mongodb";
 
 const options = {
@@ -8,12 +8,6 @@ const options = {
     strict: true,
   },
 };
-
-if (mongodbURI === "") {
-  throw new Error(
-    "Invalid MONGODB_URI environment variable. Please set it and run again.",
-  );
-}
 
 declare global {
   // eslint-disable-next-line no-var
@@ -26,6 +20,7 @@ class Singleton {
   private readonly clientPromise: Promise<MongoClient>;
 
   private constructor() {
+    if (!mongodbURI) throw new Error("No MONGODB_URI provided");
     this.client = new MongoClient(mongodbURI, options);
     this.clientPromise = this.client.connect();
 

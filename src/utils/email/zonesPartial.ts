@@ -1,4 +1,4 @@
-import { type INotification } from "../../../types";
+import { type INotification } from "../../../types.js";
 
 const zonesPartial = (notifications: INotification[]) => {
   return notifications.map((notification) => {

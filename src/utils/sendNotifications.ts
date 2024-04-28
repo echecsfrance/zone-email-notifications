@@ -1,14 +1,16 @@
 import fs from "fs";
 
-import { type IEmailMessage, type IUserData } from "../../types";
-import { EMAIL_API_KEY } from "../config";
-import emailTemplate from "./email/emailTemplate";
-import zonesPartial from "./email/zonesPartial";
-import { addNotifiedTournaments } from "./tournaments";
+import { type IEmailMessage, type IUserData } from "../../types.js";
+import { EMAIL_API_KEY } from "../config.js";
+import emailTemplate from "./email/emailTemplate.js";
+import zonesPartial from "./email/zonesPartial.js";
+import { addNotifiedTournaments } from "./tournaments.js";
 
-import { sendEmail } from "../lib/sendGrid";
+import { sendEmail } from "../lib/sendGrid.js";
 
 export const sendNotifications = async (user: IUserData) => {
+  if (!EMAIL_API_KEY) throw new Error("No email API key found");
+
   const zones = zonesPartial(user.notifications);
   const html = emailTemplate(zones);
 
@@ -34,13 +36,14 @@ export const sendNotifications = async (user: IUserData) => {
     // only send mail in production
     if (process.env.NODE_ENV !== "production") {
       fs.writeFileSync("email.html", html);
-      console.log("Email sent successfully");
     } else {
       await sendEmail(msg, EMAIL_API_KEY);
     }
 
+    console.log("Email sent successfully");
+
     await addNotifiedTournaments(user); // on success, add tournament IDs to user in DB as already notified
   } catch (error) {
-    console.error("Error sending email: ", error);
+    console.error("Error sending email: ", error); // TODO log error to file or Discord channel
   }
 };

@@ -1,5 +1,5 @@
-import { type IUserData, type Tournament } from "../../types";
-import clientPromise from "../lib/mongodb";
+import { type IUserData, type Tournament } from "../../types.js";
+import clientPromise from "../lib/mongodb.js";
 import { ObjectId } from "mongodb";
 
 export const getScheduledTournaments = async () => {

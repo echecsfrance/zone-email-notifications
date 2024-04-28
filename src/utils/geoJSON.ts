@@ -1,3 +1,4 @@
+// @ts-expect-error turf bindings are not updated in the library
 import { type Coord, type Polygon, booleanPointInPolygon } from "@turf/turf";
 
 export const pointInsidePolygon = (point: Coord, polygon: Polygon) =>

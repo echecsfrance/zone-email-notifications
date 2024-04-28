@@ -1,9 +1,10 @@
-import { type Tournament } from "../types";
+import { type Tournament } from "../types.js";
+// @ts-expect-error turf bindings are not updated in the library
 import { type Coord, type Polygon } from "@turf/turf";
-import { getScheduledTournaments } from "./utils/tournaments";
-import { Users } from "./users";
-import { pointInsidePolygon } from "./utils/geoJSON";
-import { sendNotifications } from "./utils/sendNotifications";
+import { getScheduledTournaments } from "./utils/tournaments.js";
+import { Users } from "./users.js";
+import { pointInsidePolygon } from "./utils/geoJSON.js";
+import { sendNotifications } from "./utils/sendNotifications.js";
 
 async function main() {
   const scheduledTournaments: Tournament[] = await getScheduledTournaments();
