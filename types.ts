@@ -1,3 +1,6 @@
+// @ts-expect-error turf bindings are not updated in the library
+import { type Feature } from "@turf/turf";
+
 export type Tournament = any; // TODO fix type
 
 // export interface Tournament {
@@ -19,7 +22,7 @@ export type Tournament = any; // TODO fix type
 //   status: string;
 //   geoJSON?: {
 //     type: string;
-//     coordinates: number[];
+//     coordinates: Array<number | undefined>;
 //   };
 // }
 
@@ -49,7 +52,7 @@ export interface INotification {
   rapidNotifications: boolean;
   blitzNotifications: boolean;
   tournaments: ITournamentNotification[];
-  zones: any[]; // TODO fix
+  zones: Feature[];
 }
 
 export interface IUserData {
