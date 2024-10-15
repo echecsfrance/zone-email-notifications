@@ -1,11 +1,21 @@
-import sgMail from "@sendgrid/mail";
+import aws from "@aws-sdk/client-ses";
 import fs from "fs";
+import nodemailer from "nodemailer";
 
-import { EMAIL_API_KEY } from "../config";
 import { UserModel } from "../database/models/userModel";
 import { Tournament } from "../types";
 
 import emailTemplate from "./emailTemplate";
+
+const ses = new aws.SES({
+  apiVersion: "2010-12-01",
+  region: "eu-west-3",
+});
+
+// create Nodemailer SES transporter
+const transporter = nodemailer.createTransport({
+  SES: { ses, aws },
+});
 
 type Messages = {
   from: string;
@@ -47,23 +57,20 @@ export const sendNotification = async (
 
   const t = user.locale === "en" ? enMessages : frMessages;
 
-  const msg = {
-    to: user.email,
-    from: t.from,
-    subject: t.subject,
-    text: "", // TODO text version of email
-    html,
-  };
-
   try {
-    // Only send mail in production
-    if (process.env.NODE_ENV !== "production") {
-      fs.writeFileSync("email.html", html);
-      console.log("Email sent successfully");
+    if (process.env.AWS_ACCESS_KEY_ID !== "") {
+      await transporter.sendMail({
+        from: t.from,
+        to: user.email,
+        subject: t.subject,
+        text: "",
+        html,
+      });
     } else {
-      sgMail.setApiKey(EMAIL_API_KEY);
-      await sgMail.send(msg);
+      fs.writeFileSync("email.html", html);
+      console.log("Email written to email.html");
     }
+
     return true;
   } catch (error) {
     console.error(`Error sending email to ${user.email}: `, error);
