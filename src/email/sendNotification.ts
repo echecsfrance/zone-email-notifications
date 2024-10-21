@@ -15,6 +15,7 @@ const ses = new aws.SES({
 // create Nodemailer SES transporter
 const transporter = nodemailer.createTransport({
   SES: { ses, aws },
+  sendingRate: 14,
 });
 
 type Messages = {
