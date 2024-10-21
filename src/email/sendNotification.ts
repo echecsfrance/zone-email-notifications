@@ -2,10 +2,10 @@ import aws from "@aws-sdk/client-ses";
 import fs from "fs";
 import nodemailer from "nodemailer";
 
-import { UserModel } from "../database/models/userModel";
-import { Tournament } from "../types";
+import { UserModel } from "../database/models/userModel.js";
+import { Tournament } from "../types.js";
 
-import emailTemplate from "./emailTemplate";
+import emailTemplate from "./emailTemplate.js";
 
 const ses = new aws.SES({
   apiVersion: "2010-12-01",

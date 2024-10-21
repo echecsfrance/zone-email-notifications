@@ -3,9 +3,9 @@ import { parse } from "date-fns/parse";
 import { Polygon } from "geojson";
 import { ObjectId } from "mongodb";
 
-import { collections, dbConnect } from "./database/mongodb";
-import { sendNotification } from "./email/sendNotification";
-import { Tournament } from "./types";
+import { collections, dbConnect } from "./database/mongodb.js";
+import { sendNotification } from "./email/sendNotification.js";
+import { Tournament } from "./types.js";
 
 const isTournamentInPolygons = (
   tournament: Tournament,

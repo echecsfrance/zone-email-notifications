@@ -1,6 +1,6 @@
 import { WithId } from "mongodb";
 
-import { TournamentModel } from "./database/models/tournamentModel";
+import { TournamentModel } from "./database/models/tournamentModel.js";
 
 export type Prettify<T> = {
   [K in keyof T]: T[K];
