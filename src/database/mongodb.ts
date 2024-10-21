@@ -1,10 +1,10 @@
 import mongoDB, { MongoClient } from "mongodb";
 
-import { MONGODB_URI } from "../config";
+import { TournamentModel } from "./models/tournamentModel.js";
+import { UserModel } from "./models/userModel.js";
+import { ZoneModel } from "./models/zoneModel.js";
 
-import { TournamentModel } from "./models/tournamentModel";
-import { UserModel } from "./models/userModel";
-import { ZoneModel } from "./models/zoneModel";
+process.loadEnvFile();
 
 export const collections: {
   users?: mongoDB.Collection<UserModel>;
@@ -18,11 +18,7 @@ if (!process.env.MONGODB_URI) {
 
 const options = {};
 
-if (!process.env.MONGODB_URI) {
-  throw new Error("Please add your Mongo URI to .env.local");
-}
-
-const client = new MongoClient(MONGODB_URI, options);
+const client = new MongoClient(process.env.MONGODB_URI, options);
 const clientPromise = client.connect();
 
 export async function dbConnect() {

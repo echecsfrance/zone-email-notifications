@@ -1,7 +1,7 @@
 import { format, isSameDay } from "date-fns";
 import { enGB, fr } from "date-fns/locale";
 
-import { Tournament } from "../types";
+import { Tournament } from "../types.js";
 
 type Messages = {
   htmlTitle: string;
