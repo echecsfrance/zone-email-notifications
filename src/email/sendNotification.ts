@@ -1,4 +1,4 @@
-import aws from "@aws-sdk/client-ses";
+import * as aws from "@aws-sdk/client-ses";
 import fs from "fs";
 import nodemailer from "nodemailer";
 
@@ -10,6 +10,10 @@ import emailTemplate from "./emailTemplate.js";
 const ses = new aws.SES({
   apiVersion: "2010-12-01",
   region: "eu-west-3",
+  credentials: {
+    accessKeyId: process.env.SES_AWS_ACCESS_KEY_ID!,
+    secretAccessKey: process.env.SES_AWS_SECRET_ACCESS_KEY!,
+  },
 });
 
 // create Nodemailer SES transporter

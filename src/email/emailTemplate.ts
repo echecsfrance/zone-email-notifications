@@ -449,18 +449,6 @@ const emailTemplate = (
                         <!-- END MAIN CONTENT AREA -->
                     </table>
 
-                    <!-- START FOOTER -->
-                    <div class="footer">
-                        <table role="presentation" border="0" cellpadding="0" cellspacing="0">
-                            <tr>
-                                <td class="content-block powered-by">
-                                    Powered by <a href="https://sendgrid.com">SendGrid</a>.
-                                </td>
-                            </tr>
-                        </table>
-                    </div>
-                    <!-- END FOOTER -->
-
                     <!-- END CENTERED WHITE CONTAINER -->
                 </div>
             </td>

@@ -1,0 +1,28 @@
+# "org" ensures this Service is used with the correct Serverless Framework Access Key.
+org: tarmes
+
+# "app" enables Serverless Framework Dashboard features and sharing them with other Services.
+app: zone-email-notifications
+
+# "service" is the name of this project. This will also be added to your AWS resource names.
+service: zone-email-notifications
+
+provider:
+  name: aws
+  runtime: nodejs20.x
+  region: eu-west-3
+
+build:
+  esbuild:
+    external:
+      - "@aws-sdk"
+      - "@aws-sdk/client-ses"
+
+plugins:
+  - serverless-dotenv-plugin
+
+functions:
+  rateHandler:
+    handler: src/index.run
+    events:
+      - schedule: cron(0 8 * * ? *)

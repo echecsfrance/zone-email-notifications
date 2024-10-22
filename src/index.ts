@@ -108,4 +108,8 @@ async function main() {
   process.exit(0);
 }
 
-await main();
+export const run = async () => {
+  await main();
+};
+
+// await main();

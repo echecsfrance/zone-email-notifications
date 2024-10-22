@@ -4,7 +4,7 @@ import { TournamentModel } from "./models/tournamentModel.js";
 import { UserModel } from "./models/userModel.js";
 import { ZoneModel } from "./models/zoneModel.js";
 
-process.loadEnvFile();
+// process.loadEnvFile();
 
 export const collections: {
   users?: mongoDB.Collection<UserModel>;
